@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #message {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number (1 ~ 100)</h1>
+    <input type="number" id="userInput" placeholder="Enter a number">
+    <button onclick="checkNumber()">Guess</button>
+    <button onclick="resetGame()">Restart</button>
+    <p id="message"></p>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkNumber() {
+            let userInput = parseInt(document.getElementById("userInput").value);
+            let message = document.getElementById("message");
+
+            if (isNaN(userInput) || userInput < 1 || userInput > 100) {
+                message.textContent = "Please enter a number between 1 and 100!";
+                return;
+            }
+
+            if (userInput < randomNumber) {
+                message.textContent = "UP!";
+            } else if (userInput > randomNumber) {
+                message.textContent = "DOWN!";
+            } else {
+                message.textContent = "🎉 Congratulations! You guessed it right! 🎉";
+            }
+        }
+
+        function resetGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            document.getElementById("message").textContent = "";
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
